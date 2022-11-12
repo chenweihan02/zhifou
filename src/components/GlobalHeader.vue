@@ -8,7 +8,8 @@
         <a class="btn" href="#">注册</a>
       </div>
       <div v-else>
-        <a class="btn" href="#">你好 xxx</a>
+        <drop-down />
+        <!-- <a class="btn" href="#">你好 xxx</a> -->
       </div>
     </div>
   </div>
@@ -16,6 +17,7 @@
 
 <script lang="ts" setup>
  import { defineComponent, PropType, ref } from 'vue';
+ import DropDown from './DropDown.vue';
 
 //  interface UserProps {
 //     isLogin: boolean

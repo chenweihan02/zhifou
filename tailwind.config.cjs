@@ -4,6 +4,11 @@ module.exports = {
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
+  variants: {
+    extend: {
+      scale: ['focus-within']
+    }
+  },
   presets: [],
   darkMode: 'media', // or 'class'
   theme: {
