@@ -23,5 +23,8 @@
 <script lang="ts" setup>
 
   import ColumnList from '@/components/ColumnList.vue';
+  import { useStore } from 'vuex';
+
+
 
 </script>

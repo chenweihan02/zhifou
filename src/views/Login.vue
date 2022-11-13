@@ -38,7 +38,12 @@
 <script lang="ts" setup>
   import ValidateForm from '@/components/ValidateForm.vue'
   import ValidateInput, { RulesProps } from '@/components/ValidateInput.vue'
+
   import { ref } from 'vue'
+
+  import { useStore } from 'vuex';
+  import { GlobalDataProps } from '@/store';
+import router from '@/router';
 
   const emailRules: RulesProps = [
     { type: "required", message: "电子邮箱地址不能为空" },
@@ -52,13 +57,27 @@
   const emailVal = ref('')
   const passwordVal = ref('')
 
+  const store = useStore<GlobalDataProps>()
+
   const onFormSubmit = (result: boolean) => {
     if (result) {
       const payload = {
         email: emailVal.value,
         password: passwordVal.value
       }
+      store
+        .dispatch('loginAndFetch', payload)
+        .then(() => {
+          console.log('登录成功')
+          console.log(store.state.user.nickName)
+          router.push({ name: 'home' })
+        })
+        .catch((e) => {
+          console.log('登录失败')
+        })
       console.log('校验成功', emailVal.value, '-', passwordVal.value)
+    } else {
+      console.log('校验失败')
     }
   }
 

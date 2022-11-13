@@ -1,9 +1,11 @@
 
 import { createRouter, createWebHistory } from 'vue-router'
-const routerHistory = createWebHistory()
+
+import store from '@/store'
+import http from '@/utils/http'
 
 const router = createRouter({
-  history: routerHistory,
+  history: createWebHistory(),
   routes: [
     {
       path: '/',
@@ -13,12 +15,14 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import("@/views/Login.vue")
+      component: () => import("@/views/Login.vue"),
+      meta: { redirectAlreadyLogin: true } // 已经登录,直接跳转到首页
     },
     {
       path: '/signup',
       name: 'signup',
-      component: () => import("@/views/Signup.vue")
+      component: () => import("@/views/Signup.vue"),
+      meta: { redirectAlreadyLogin: true }
     },
     {
       path: '/column/:id',
@@ -29,8 +33,33 @@ const router = createRouter({
       path: '/post/:id',
       name: 'post',
       component: () => import("@/views/PostDetail/PostDetail.vue")
-    }
+    },
   ]
+})
+
+
+router.beforeEach((to, from, next) => {
+  const { user, token } = store.state
+  const { requiredLogin, redirectAlreadyLogin } = to.meta
+
+  if (!user.isLogin) { // 未登录
+    if (token) { // 有token
+        http.defaults.headers.common.Authorization = `Bearer ${token}`
+        //获取当前用户
+    } else { // 没有token
+      if (requiredLogin) { // 访问需要权限的页面
+        next('/login')
+      } else {
+        next()
+      }
+    }
+  } else { // 已登录
+    if (redirectAlreadyLogin) {
+      next('/')
+    } else {
+      next()
+    }
+  }
 })
 
 export default router

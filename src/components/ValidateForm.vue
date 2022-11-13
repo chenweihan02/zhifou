@@ -38,9 +38,9 @@
   const emit = defineEmits(['form-submit'])
   const submitForm = () => {
     const result = funcArr.map(func => func()).every(result => result)
-    console.log(funcArr)
+    // console.log(funcArr)
     emit('form-submit', result)
-    console.log('Form.vue submitForm', result)
+    // console.log('Form.vue submitForm', result)
   }
 
   const callback = (func?: ValidateFunc) => {

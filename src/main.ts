@@ -8,6 +8,4 @@ import './style.css'
 // 异步组件
 // import Home from './views/Home.vue'
 
-
-
 createApp(App).use(router).use(store).mount('#app')

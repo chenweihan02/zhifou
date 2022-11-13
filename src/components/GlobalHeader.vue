@@ -3,15 +3,13 @@
     <div class="flex max-w-screen-xl mx-auto justify-between h-full items-center">
       
       <router-link to="/"><h1 class="text-xl text-white">知否知否</h1></router-link>
-
-
-      <!-- v-if="!user.isLogin" -->
-      <div v-if="!isLogin">
+      <!--  -->
+      <div v-if="!user.isLogin">
         <router-link to="/login" class="btn">登录</router-link>
         <router-link to="/signup"  class="btn">注册</router-link>
       </div>
       <div v-else>
-        <drop-down />
+        <drop-down :title="`你好 ${user.nickName}`"/>
         <!-- <a class="btn" href="#">你好 xxx</a> -->
       </div>
     </div>
@@ -21,6 +19,8 @@
 <script lang="ts" setup>
  import { defineComponent, PropType, ref } from 'vue';
  import DropDown from './DropDown.vue';
+  import { UserProps } from '@/store'
+
 
 //  interface UserProps {
 //     isLogin: boolean
@@ -28,14 +28,15 @@
 //     id?: number
 //   }
 
-  const isLogin = ref(false)
+  // const isLogin = ref(false)
 
-  // defineProps ({
-  //     user: {
-  //       type: Object as PropType<UserProps>,
-  //       required: true
-  //    }
-  // })
+  const props = defineProps ({
+      user: {
+        type: Object as PropType<UserProps>,
+        required: true
+     }
+  })
+
 
 //   export interface UserProps {
 //     isLogin: boolean
