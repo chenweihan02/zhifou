@@ -8,7 +8,6 @@
           :rules="emailRules" v-model="emailVal" 
           placeholder="请输入邮箱地址" 
           type="text"
-          ref="inputRef"
         />
       </div>
 
@@ -34,29 +33,12 @@
   </div>
 </template>
 
-<script lang="ts">
-	export default {
-		name: "login"
-	}
-</script>
+
 
 <script lang="ts" setup>
   import ValidateForm from '@/components/ValidateForm.vue'
-  import ValidateInput from '@/components/ValidateInput.vue'
-
+  import ValidateInput, { RulesProps } from '@/components/ValidateInput.vue'
   import { ref } from 'vue'
-  import { useRouter } from 'vue-router'
-  import { useStore } from 'vuex'
-
-  
-  interface RuleProps {
-    type: 'required' | 'email' | 'custom'
-    message: string
-    validator?: () => boolean
-  }
-
-  type RulesProps = RuleProps[]
-
 
   const emailRules: RulesProps = [
     { type: "required", message: "电子邮箱地址不能为空" },
@@ -67,11 +49,8 @@
     { type: "required", message: "密码不能为空" },
   ];
 
-  const inputRef = ref<any>()
   const emailVal = ref('')
   const passwordVal = ref('')
-
-
 
   const onFormSubmit = (result: boolean) => {
     if (result) {
