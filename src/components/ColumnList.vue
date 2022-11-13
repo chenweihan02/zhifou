@@ -3,7 +3,7 @@
   <div class="max-w-screen-xl mx-auto">
     <ul class="flex flex-wrap flex-row">
       <li class="w-1/3 flex-none  p-3" v-for="column in testData" :key="column.id">
-        <div class="min-h-full p-4 border rounded-md border-black-500 box-border flex items-center flex-nowrap flex-col">
+        <div class="shadow-md min-h-full p-4 border rounded-md border-black-500 box-border flex items-center flex-nowrap flex-col">
           <img class="w-16 rounded-full" :src="column.avatar" alt="column.title">
           <h5 class="mt-3 text-xl">{{ column.title }}</h5>
           <p class="text-gray-700 mt-3 text-center">{{ column.description }}</p>

@@ -1,11 +1,14 @@
 <template>
   <div class="bg-blue-600 h-14">
     <div class="flex max-w-screen-xl mx-auto justify-between h-full items-center">
-      <h1 class="text-xl text-white">知否知否</h1>
+      
+      <router-link to="/"><h1 class="text-xl text-white">知否知否</h1></router-link>
+
+
       <!-- v-if="!user.isLogin" -->
       <div v-if="!isLogin">
-        <a class="btn" href="#">登录</a>
-        <a class="btn" href="#">注册</a>
+        <router-link to="/login" class="btn">登录</router-link>
+        <router-link to="/signup"  class="btn">注册</router-link>
       </div>
       <div v-else>
         <drop-down />
@@ -25,7 +28,7 @@
 //     id?: number
 //   }
 
-  const isLogin = ref(true)
+  const isLogin = ref(false)
 
   // defineProps ({
   //     user: {
