@@ -25,9 +25,22 @@ You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/
 1. mitt, 在validateForm中使用报错， emitter.emit not a function, 将emitter定义在mittBus中然后导出。
 2. API: http://duanhf.cn:8099/public/swagger/index.html#/user/post_api_user_login
 3. inheritAttrs 禁止attrs穿透，写在子组件的位置。
-4. 使用mock 数据 npm i --save-dev @types/mockjs 安装mock npm uninstall --save-dev @types/mockjs
+4. 使用mock 数据 安装：`npm i --save-dev @types/mockjs` 卸载： `mock npm uninstall --save-dev @types/mockjs` 
 
 
+---
+未解决：
+1. createMessage，render，h函数
 
+```ts
+  <message>
+    <message-item />
+    <message-item />
+    <message-item />
+    <message-item />
+  </message>
+```
 
+---
+已完成：
 1. login.vue ok

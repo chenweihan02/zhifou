@@ -73,7 +73,7 @@ import router from '@/router';
           router.push({ name: 'home' })
         })
         .catch((e) => {
-          console.log('登录失败')
+          console.log('登录失败', e)
         })
       console.log('校验成功', emailVal.value, '-', passwordVal.value)
     } else {
