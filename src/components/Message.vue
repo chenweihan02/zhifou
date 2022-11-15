@@ -1,5 +1,5 @@
 <template>
-  <div class="border mx-auto p-2 bg-white shadow-xl mb-2 rounded">
+  <div class="border mx-auto p-2 pr-4 bg-white shadow-xl mb-2 rounded">
     <div class=" flex items-center ">
       <svg v-if="type === 'default'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-blue-500">
         <path fill-rule="evenodd"

@@ -34,6 +34,18 @@ const router = createRouter({
       name: 'post',
       component: () => import("@/views/PostDetail/PostDetail.vue")
     },
+    {
+      path: '/edit',
+      name: 'edit',
+      component: () => import("@/views/UserDetail.vue"),
+      meta: { requiredLogin: true }
+    },
+    {
+      path: '/create',
+      name: 'create',
+      component: () => import("@/views/CreatePost.vue"),
+      meta: { requiredLogin: true }
+    }
   ]
 })
 
@@ -46,6 +58,22 @@ router.beforeEach((to, from, next) => {
     if (token) { // 有token
         http.defaults.headers.common.Authorization = `Bearer ${token}`
         //获取当前用户
+
+        store
+          .dispatch('fetchCurrentUser')
+          .then((res) => {
+            if (res.code) {
+              if (redirectAlreadyLogin) {
+                next("/");
+              } else {
+                next();
+              }
+            } else {
+              store.commit("logout");
+              next("/login");
+            }
+          })
+
     } else { // 没有token
       if (requiredLogin) { // 访问需要权限的页面
         next('/login')

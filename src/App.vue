@@ -1,6 +1,9 @@
 <template>
     <global-header :user="currentUser"/>
     <!-- <modal /> -->
+
+    <loader v-show="isLoading" :text="'拼命加载中'"/>
+
     <router-view></router-view>
 
     
@@ -22,12 +25,12 @@
 
   import createMessage from '@/hooks/useCreateMessage'
 
+  import Loader from './components/Loader.vue'
+
+  const isLoading = computed(() => store.state.loading)
+
   const currentUser = computed(() => store.state.user)
   
-  createMessage('123', 'default')
-
-
-
 </script>
 
 

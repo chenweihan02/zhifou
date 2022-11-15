@@ -1,48 +1,7 @@
 import { Commit, createStore } from 'vuex'
+import { GlobalDataProps, } from './types'
 import axios, { AxiosRequestConfig } from 'axios'
 import http from '@/utils/http'
-
-export interface ImageProps {
-  _id?: string
-  url?: string
-  createdAt?: string
-}
-
-export interface UserProps {
-  isLogin: boolean
-  nickName?: string
-  _id?: string
-  column?: string
-  email?: string
-  avatar?: ImageProps
-  description?: string
-}
-
-export interface ResponseType< P = Record<string, unknown>> {
-  code: number
-  msg: string
-  data: P
-}
-
-export interface ColumnProps {
-  _id: string
-  title: string
-  avatar?: ImageProps
-  description: string
-  author: string
-}
-
-export interface GlobalErrorProps {
-  status: boolean
-  message?: string
-}
-
-export interface GlobalDataProps {
-  token: string
-  user: UserProps
-  loading: boolean
-  error: GlobalErrorProps
-}
 
 const asyncAndCommit = async(
   url: string,
@@ -65,7 +24,7 @@ const asyncAndCommit = async(
 
 const store = createStore<GlobalDataProps>({
   state: {
-    token: '',
+    token: localStorage.getItem('token') || '',
     loading: false,
     user: { isLogin: false },
     error: {
@@ -76,23 +35,40 @@ const store = createStore<GlobalDataProps>({
 
   },
   mutations: {
+    setLoading(state, status){
+      state.loading = status
+    },
     login(state, rawData) {
       const { token } = rawData.data
-      state.token = token
-      axios.defaults.headers.common.Authorization = `Bearer ${token}`
+      console.log('login token raw', token, rawData)
+      if (rawData.code) {
+        state.token = token
+        localStorage.setItem('token', token)
+        http.defaults.headers.common.Authorization = `Bearer ${token}`
+      }
     },
     fetchCurrentUser(state, rawDate) {
-      state.user = { 
-        isLogin: true,
-        // nickName: rawDate.data.data.nickName
-        ...rawDate.data.data
+      console.log('fetchCurrentUser', rawDate, rawDate.code)
+      if (rawDate.code) {
+        state.user = { 
+          isLogin: true,
+          ...rawDate.data
+        }
+        console.log('user', state.user)
       }
-      console.log('raw', state.user)
+    },
+    logout(state) {
+      state.token = ''
+      state.user = { isLogin: false }
+      localStorage.removeItem('token')
+      delete http.defaults.headers.common.Authorization
     }
   },
   actions: {
     fetchCurrentUser({ commit }) {
-      return asyncAndCommit('/api/user/current', 'fetchCurrentUser', commit)
+      return asyncAndCommit('/api/user/current', 'fetchCurrentUser', commit, {
+        method: 'post'
+      })
     },
     login({ commit }, payload) {
       return asyncAndCommit('/api/user/login', 'login', commit, {
@@ -101,8 +77,9 @@ const store = createStore<GlobalDataProps>({
       })
     },
     // 登录并获取用户信息
-    loginAndFetch({ dispatch }, payload) {
-      return dispatch('login', payload).then(() => {
+    async loginAndFetch({ dispatch }, loginData) {
+      return dispatch('login', loginData).then((res) => {
+        console.log('loginAndFetch', res)
         return dispatch('fetchCurrentUser')
       })
     }

@@ -42,8 +42,11 @@
   import { ref } from 'vue'
 
   import { useStore } from 'vuex';
-  import { GlobalDataProps } from '@/store';
-import router from '@/router';
+  import { GlobalDataProps } from '@/store/types';
+  import router from '@/router';
+
+  import useCreateMessage from '@/hooks/useCreateMessage'
+
 
   const emailRules: RulesProps = [
     { type: "required", message: "电子邮箱地址不能为空" },
@@ -65,17 +68,40 @@ import router from '@/router';
         email: emailVal.value,
         password: passwordVal.value
       }
+
       store
         .dispatch('loginAndFetch', payload)
-        .then(() => {
-          console.log('登录成功')
-          console.log(store.state.user.nickName)
-          router.push({ name: 'home' })
+        .then((res) => {
+          console.log('login.vue res', res)
+          
+          if (res.code) {
+            useCreateMessage('登录成功, 2s后跳转', 'success')
+            console.log(store.state.user.nickname)
+            setTimeout(() => {
+              router.push({ name: 'home' })
+            }, 2000);
+          } else {
+            useCreateMessage('登录失败', 'error')
+            console.log('登录失败', res)
+          }
         })
-        .catch((e) => {
-          console.log('登录失败', e)
-        })
-      console.log('校验成功', emailVal.value, '-', passwordVal.value)
+
+      // store
+      //   .dispatch('loginAndFetch', payload)
+      //   .then((res) => {
+      //     console.log('login.vue res', res)
+      //     useCreateMessage('登录成功, 2s后跳转', 'success')
+      //     console.log(store.state.user.nickName)
+      //     setTimeout(() => {
+      //       // router.push({ name: 'home' })
+      //     }, 2000);
+          
+      //   })
+      //   .catch((e) => {
+      //     useCreateMessage('登录失败', 'error')
+      //     console.log('登录失败', e)
+      //   })
+      // console.log('校验成功', emailVal.value, '-', passwordVal.value)
     } else {
       console.log('校验失败')
     }

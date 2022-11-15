@@ -25,12 +25,22 @@ You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/
 1. mitt, 在validateForm中使用报错， emitter.emit not a function, 将emitter定义在mittBus中然后导出。
 2. API: http://duanhf.cn:8099/public/swagger/index.html#/user/post_api_user_login
 3. inheritAttrs 禁止attrs穿透，写在子组件的位置。
-4. 使用mock 数据 安装：`npm i --save-dev @types/mockjs` 卸载： `mock npm uninstall --save-dev @types/mockjs` 
+4. 使用mock 数据 安装：`npm i --save-dev @types/mockjs` 
+5. 卸载： `mock npm uninstall --save-dev @types/mockjs` 
+6. json-server `json-server db.json --routes routes.json`
+
+
+1. 安装Babel支持的Vue的jsx插件 `npm install @vue/babel-plugin-jsx -D`
+2. Vite环境 `npm install @vitejs/plugin-vue-jsx -D`
+
+
 
 
 ---
 未解决：
 1. createMessage，render，h函数
+2. 将login currentUser的JSON 放在json server中
+
 
 ```ts
   <message>
@@ -44,3 +54,22 @@ You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/
 ---
 已完成：
 1. login.vue ok
+
+
+
+----
+
+npm i less
+
+
+---
+
+出现的问题
+return 回去的数据格式
+成功和失败都返回这个格式，通过code来判断，但是then  和 catch判断条件
+{
+  code:
+  data: {}
+  time: {}
+  msg: {}
+}

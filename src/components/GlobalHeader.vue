@@ -9,7 +9,24 @@
         <router-link to="/signup"  class="btn">注册</router-link>
       </div>
       <div v-else>
-        <drop-down :title="`你好 ${user.nickName}`"/>
+        <dropdown :title="`你好 ${user.nickname}`">
+          <div class="py-1">
+            <dropdown-item>
+              <router-link to="/create">新建文章</router-link>
+            </dropdown-item>
+            <dropdown-item>
+              <router-link to="`/column/${user.column}`">我的专栏</router-link>
+            </dropdown-item>
+          </div>
+          <div class="py-1">
+            <dropdown-item>
+              <router-link to="/edit">编辑资料</router-link>
+            </dropdown-item>
+            <dropdown-item>
+              <a href="#" @click.prevent="handleLogout">退出登录</a>
+            </dropdown-item>
+          </div>
+        </dropdown>
         <!-- <a class="btn" href="#">你好 xxx</a> -->
       </div>
     </div>
@@ -18,9 +35,11 @@
 
 <script lang="ts" setup>
  import { defineComponent, PropType, ref } from 'vue';
- import DropDown from './DropDown.vue';
-  import { UserProps } from '@/store'
-
+ import Dropdown from './Dropdown.vue';
+  import { GlobalDataProps, UserProps } from '@/store/types'
+  import DropdownItem from './DropdownItem.vue';
+  import router from '@/router';
+  import { useStore } from 'vuex';
 
 //  interface UserProps {
 //     isLogin: boolean
@@ -38,6 +57,13 @@
   })
 
 
+  const store = useStore<GlobalDataProps>()
+
+  const handleLogout = () => {
+    console.log('handleLogout')
+    store.commit('logout')
+    router.push({ name: 'home' })
+  }
 //   export interface UserProps {
 //     isLogin: boolean
 //     name?: string

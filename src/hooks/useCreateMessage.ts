@@ -3,37 +3,39 @@ import Message from '@/components/Message.vue'
 
 export type MessageType = 'default' | 'success' | 'error'
 
+const messageNode = document.createElement('div')
+messageNode.className = 'fixed top-4 flex flex-col h-0 z-50 w-full'
+
+
+let messageArr: any = []
+
 const createMessage = (message: string, type: MessageType, timeout = 2000) => {
-  const messageItemInstance1 = createApp(Message, {
+  const messageItemInstance = createApp(Message, {
     message,
     type,
   })
 
+  // document.body.appendChild(messageNode)
+  if (!document.body.contains(messageNode)) {
+    document.body.appendChild(messageNode)
+  }
 
-  Message.template = '`111`'
+  const messageItemNode = document.createElement('div')
+  messageItemNode.className = 'flex'
+  messageItemInstance.mount(messageItemNode)
+  messageNode.appendChild(messageItemNode)
+  messageArr.push(messageItemNode)
 
-  const messageItemInstance2 = createApp(Message, {
-    message,
-    type
-  })
+  setTimeout(() => {
+    messageItemInstance.unmount()
+    messageNode.removeChild(messageItemNode)
+    messageArr.pop(messageItemNode)
 
-  const messageNode = document.createElement('div')
-  messageNode.className = 'fixed top-4 flex flex-col h-0 z-50 w-full'
+    if (messageArr.length === 0) {
+      document.body.removeChild(messageNode)
+    }
 
-  const messageItemNode1 = document.createElement('div')
-  const messageItemNode2 = document.createElement('div')
-
-
-  messageItemInstance1.component('my-component', {
-    Message
-  })
-
-
-  messageNode.appendChild(messageItemNode1)
-  messageNode.appendChild(messageItemNode2)
-  document.body.appendChild(messageNode)
-  messageItemInstance1.mount(messageItemNode1)
-  messageItemInstance2.mount(messageItemNode2)
+  }, timeout);
 }
 
 export default createMessage
