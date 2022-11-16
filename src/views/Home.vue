@@ -9,7 +9,7 @@
 
   <div>
     <span class="mt-20 mb-2 text-center block text-2xl">发现精彩</span>
-    <column-list />
+    <column-list :list = "list"/>
 
     <button class="block mx-auto mt-6 mb-10 rounded border border-blue-500 text-blue-500 pl-20 pr-20 pt-1.5 pb-1.5  hover:bg-blue-500 hover:text-white">
       加载更多
@@ -23,8 +23,18 @@
 <script lang="ts" setup>
 
   import ColumnList from '@/components/ColumnList.vue';
+import { GlobalDataProps } from '@/store/types';
+  import { onMounted, computed } from 'vue';
   import { useStore } from 'vuex';
 
+  const store = useStore<GlobalDataProps>()
 
+  onMounted(() => {
+    store.dispatch('fetchColumns')
+  })
+
+  const list = computed(() => store.state.columns)
+
+  console.log('Home-list', list)
 
 </script>
