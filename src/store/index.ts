@@ -43,11 +43,13 @@ const store = createStore<GlobalDataProps>({
     getColumnById: (state) => (id: string) => {
       return state.columns.data[id]
     },
-    getPosts: (state) =>{
-      return objToArr(state.posts.data)
-    },
+    // getPosts: (state) =>{
+    //   return objToArr(state.posts.data)
+    // },
     getPostsByCid: (state) => (cid: string) => {
-      return objToArr(state.posts.data).filter(post => post.column_id === cid)
+      console.log('getPostsById', cid)
+      console.log('post', state.posts.data)
+      return objToArr(state.posts.data).filter(post => post.column_id == cid)
     },
     getCurrentPost: (state) => (id: string) => {
       return state.posts.data[id]
@@ -148,11 +150,11 @@ const store = createStore<GlobalDataProps>({
       }
     },
     fetchPosts({ state, commit }, params = {}) {
-      const {currendId, currentPage = 1, pageSize = 3} = params
-      // console.log('param', params)
+      const {currentId, currentPage = 1, pageSize = 3} = params
+      console.log('param', params, currentId)
       // console.log('fetchPosts', currendId, currentPage, pageSize)
       // if (!state.posts.loadedColumns.includes(cid)) {
-        return asyncAndCommit(`api/post/page?cid=${currendId}&currentPage=${currentPage}&pageSize=${pageSize}`, 'fetchPosts', commit)
+        return asyncAndCommit(`api/post/page?cid=${currentId}&currentPage=${currentPage}&pageSize=${pageSize}`, 'fetchPosts', commit)
       // }
     }
   }

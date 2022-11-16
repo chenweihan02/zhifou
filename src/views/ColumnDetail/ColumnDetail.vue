@@ -6,12 +6,12 @@
       <column-item :posts="list"/>
     </div>
 
-    <!-- <button 
+    <button 
       @click="loadMorePage"
       v-if="!isLastPage"
       class="block mx-auto mt-6 rounded border border-blue-500 text-blue-500 pl-20 pr-20 pt-1.5 pb-1.5  hover:bg-blue-500 hover:text-white">
       加载更多
-    </button> -->
+    </button>
   </div>
 
   <pre>{{route}}</pre>
@@ -32,14 +32,14 @@
 
   const store = useStore<GlobalDataProps>()
   const currentId = route.params.id
-
+  // console.log('ColumnDetail', typeof currentId)
   onMounted(() => {
     store.dispatch('fetchColumn', currentId)
-    store.dispatch('fetchPosts', {currendId: currentId})
+    store.dispatch('fetchPosts', {currentId: currentId})
   })
 
   const column = computed(() => {
-    //TODO why
+    //TODO why?
     const selectColumn = store.getters.getColumnById(currentId) as ColumnProps | undefined
     if (selectColumn) {
       
@@ -50,12 +50,11 @@
   // const posts = computed(() => store.getters.getPostsByCid(currentId))
 
 
-  const list = computed(() => store.getters.getPosts)
+  const list = computed(() => store.getters.getPostsByCid(currentId))
   const total = computed(() => store.state.posts.total)
   
   console.log('Detail   ', list)
 
-  // console.log('detail', currentId)
-  // const { loadMorePage, isLastPage } = useLoadMore('fetchPosts', total, { currentId: currentId, currentPage: 2, pageSize: 3})
+  const { loadMorePage, isLastPage } = useLoadMore('fetchPosts', total, { currentId: Number(currentId), currentPage: 2, pageSize: 3})
 
 </script>

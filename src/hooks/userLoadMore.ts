@@ -3,27 +3,26 @@ import { useStore } from 'vuex'
 
 
 interface LoadParams {
-  currentId: string,
+  currentId: number,
   currentPage: number,
   pageSize: number
 }
 
 const useLoadMore = (actionName: string, total: ComputedRef,
-    params: LoadParams = { currentId: '', currentPage: 2, pageSize: 3}) => {
-    const store = useStore()
+    params: LoadParams = { currentId: -1, currentPage: 2, pageSize: 3}) => {
+      const store = useStore()
       const currentPage = ref(params.currentPage)
       const pageSize = ref(params.pageSize)
       const currentId = ref(params.currentId)
-
-
-      console.log('useLoadMore currendId', currentId)
-
 
       const requestParams = computed(() => ({
           currentPage: currentPage.value,
           pageSize: pageSize.value,
           currentId: currentId.value
       }))
+
+      console.log('useLoadMore', requestParams.value)
+
     const loadMorePage = () => {
       store.dispatch(actionName, requestParams.value).then(() => {
         currentPage.value ++
