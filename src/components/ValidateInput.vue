@@ -8,13 +8,13 @@
       v-bind="$attrs"
     />
 
-    <!-- <textarea
+    <textarea
       v-else
       class="con invalid focus: border-blue-500 focus:border-opacity-75 focus:ring-4 focus: ring-blue-600 focus:ring-offset-0 focus:ring-opacity-40"
       @blur="validateInput"
       v-model="inputRef.val"
       v-bind="$attrs"
-    /> -->
+    />
 
     <span v-if="inputRef.error" class="block text-red-500 text-sm">{{ inputRef.message }}</span>
   </div>

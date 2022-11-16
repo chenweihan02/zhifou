@@ -89,3 +89,7 @@ http://localhost:8081/api/column/detail?id=1
 修改专栏，
 编辑资料
 注册。
+
+
+login.vue 和 signup.vue 按钮位置
+login.vue 和 signup 输入信息之后 清空输入框

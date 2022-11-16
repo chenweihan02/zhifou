@@ -21,7 +21,7 @@
       </div>
 
       <template #guide>
-        <a href="#" class="inline-block mt-5 text-blue-500 underline">还没有账户？去注册一个新的吧！</a>
+        <a href="/signup" class="inline-block mt-5 text-blue-500 underline">还没有账户？去注册一个新的吧！</a>
       </template>
 
       <template #submit>
