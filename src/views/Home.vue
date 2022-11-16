@@ -11,29 +11,34 @@
     <span class="mt-20 mb-2 text-center block text-2xl">发现精彩</span>
     <column-list :list = "list"/>
 
-    <button class="block mx-auto mt-6 mb-10 rounded border border-blue-500 text-blue-500 pl-20 pr-20 pt-1.5 pb-1.5  hover:bg-blue-500 hover:text-white">
+    <button 
+      @click="loadMorePage"
+      v-if="!isLastPage"
+      class="block mx-auto mt-6 rounded border border-blue-500 text-blue-500 pl-20 pr-20 pt-1.5 pb-1.5  hover:bg-blue-500 hover:text-white">
       加载更多
     </button>
   </div>
-
 </template>
 
 
 
 <script lang="ts" setup>
 
-  import ColumnList from '@/components/ColumnList.vue';
-import { GlobalDataProps } from '@/store/types';
+  import ColumnList from '@/components/ColumnList.vue'; 
+  import { GlobalDataProps } from '@/store/types';
   import { onMounted, computed } from 'vue';
   import { useStore } from 'vuex';
+  import useLoadMore from '@/hooks/userLoadMore'
 
   const store = useStore<GlobalDataProps>()
 
   onMounted(() => {
-    store.dispatch('fetchColumns')
+    store.dispatch('fetchColumns', { pageSize: 3})
   })
 
-  const list = computed(() => store.state.columns)
+  const list = computed(() => store.getters.getColumns)
+  const total = computed(() => store.state.columns.total)
+  const { loadMorePage, isLastPage } = useLoadMore('fetchColumns', total, { currentId: '' , currentPage: 2, pageSize: 3})
 
   console.log('Home-list', list)
 

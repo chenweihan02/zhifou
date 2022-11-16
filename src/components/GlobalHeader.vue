@@ -15,7 +15,7 @@
               <router-link to="/create">新建文章</router-link>
             </dropdown-item>
             <dropdown-item>
-              <router-link to="`/column/${user.column}`">我的专栏</router-link>
+              <router-link :to="`/column/${user.column_id}`">我的专栏</router-link>
             </dropdown-item>
           </div>
           <div class="py-1">

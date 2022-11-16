@@ -79,6 +79,11 @@ column 专栏没有默认图片，在columnlist中新加一个 computed属性，
 如果没有图片，则添加默认图片 ||      使用自定义指令
 
 
+获取指定id的专栏
+http://localhost:8081/api/column/detail?id=1
+获取指定id专栏的post
+
+
 下一步，修改数据库，调试端口。
 显示专栏文章。
 修改专栏，

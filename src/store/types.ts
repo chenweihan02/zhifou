@@ -4,20 +4,20 @@
 //   url?: string
 // }
 
-export interface UserProps {
-  isLogin: boolean
-  nickname?: string
-  _id?: string
-  column?: string
-  email?: string
-  avatar?: string
-  description?: string
-}
-
 export interface ResponseType< P = Record<string, unknown>> {
   code: number
   msg: string
   data: P
+}
+
+export interface UserProps {
+  isLogin: boolean
+  nickname?: string
+  _id?: string
+  column_id?: string
+  email?: string
+  avatar?: string
+  description?: string
 }
 
 export interface ColumnProps {
@@ -29,13 +29,13 @@ export interface ColumnProps {
 
 export interface PostProps {
   _id?: string
+  author_id: string
+  column_id: string
   title: string
   excerpt?: string
   content?: string
-  image?: string
-  createdAt?: string
-  column?: string
-  author?: string | UserProps
+  img_url?: string
+  created_time?: string
   isHTML?: boolean
 }
 
@@ -54,16 +54,18 @@ export interface GlobalDataProps {
   user: UserProps
   loading: boolean
 
-  // columns: {
-  //   data: ListProps<ColumnProps>
-  // }
-
-  columns: ColumnProps[]
+  columns: {
+    data: ListProps<ColumnProps>
+    isLoaded: boolean
+    total: number
+  }
 
   posts: {
     data: ListProps<PostProps>
+    isLoaded: boolean
+    total: number
+    loadedColumns: string[]
   }
-
 
   error: GlobalErrorProps
 }

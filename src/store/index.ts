@@ -2,7 +2,8 @@ import { Commit, createStore } from 'vuex'
 import { GlobalDataProps, } from './types'
 import { AxiosRequestConfig } from 'axios'
 import http from '@/utils/http'
-import { objToArr } from '@/utils/hepler'
+import { objToArr, arrToObj } from '@/utils/hepler'
+import { stat } from 'fs'
 
 const asyncAndCommit = async(
   url: string,
@@ -28,16 +29,28 @@ const store = createStore<GlobalDataProps>({
     token: localStorage.getItem('token') || '',
     loading: false,
     user: { isLogin: false },
-    // columns: { data: {} },
-    columns: [],
-    posts: { data: {} },
+    columns: { data: {}, isLoaded: false, total: 0 },
+    // columns: [],
+    posts: { data: {}, isLoaded: false, total: 0, loadedColumns: []},
     error: {
       status: false
     }
   },
   getters: {
     getColumns: (state) =>{
-      // return objToArr(state.columns)
+      return objToArr(state.columns.data)
+    },
+    getColumnById: (state) => (id: string) => {
+      return state.columns.data[id]
+    },
+    getPosts: (state) =>{
+      return objToArr(state.posts.data)
+    },
+    getPostsByCid: (state) => (cid: string) => {
+      return objToArr(state.posts.data).filter(post => post.column_id === cid)
+    },
+    getCurrentPost: (state) => (id: string) => {
+      return state.posts.data[id]
     }
   },
   mutations: {
@@ -53,12 +66,12 @@ const store = createStore<GlobalDataProps>({
         http.defaults.headers.common.Authorization = `Bearer ${token}`
       }
     },
-    fetchCurrentUser(state, rawDate) {
-      console.log('fetchCurrentUser', rawDate, rawDate.code)
-      if (rawDate.code) {
+    fetchCurrentUser(state, rawData) {
+      console.log('fetchCurrentUser', rawData, rawData.code)
+      if (rawData.code) {
         state.user = { 
           isLogin: true,
-          ...rawDate.data
+          ...rawData.data
         }
         console.log('user', state.user)
       }
@@ -69,17 +82,41 @@ const store = createStore<GlobalDataProps>({
       localStorage.removeItem('token')
       delete http.defaults.headers.common.Authorization
     },
+    //Home
     fetchColumns(state, rawData) {
-      state.columns = [...objToArr(rawData.data)]
-      console.log('objtoarr',)
-      // state.columns.data = objToArr()
-      // state.columns.data = {
-        
-      // }
-      // console.log('objtoarr', objToArr(state.columns))
-      console.log('fetchColumns', rawData.data[0])
-      console.log('state columns', state.columns)
+      const { data } = state.columns
+      const { list, count } = rawData.data
+      
+      state.columns = {
+        data: {...data, ...arrToObj(list) },
+        total: count,
+        isLoaded: true
+      }
+    },
+    //column detail
+    fetchColumn(state, rawData) {
+      state.columns.data[rawData.data._id] = rawData.data
+      console.log('fetchColumn',state.columns.data[rawData.data._id])
+    },
+    // column detail
+    fetchPosts(state, rawData) {
+      const { data } = state.posts
+      const { list, count } = rawData.data
+
+      state.posts = {
+        data: {...data, ...arrToObj(list)},
+        total: count,
+        isLoaded: true,
+        loadedColumns: []
+      }
     }
+    // fetchPosts(state, { data: rawData, extraData: column_id}) {
+    //   // state.posts.data = { 
+    //   //   ...state.posts.data, 
+    //   //   ...arrToObj(rawData.data.list) 
+    //   // }
+    //   // state.posts.loadedColumns.push(column_id)
+    // }
   },
   actions: {
     // 登录并获取用户信息
@@ -100,13 +137,25 @@ const store = createStore<GlobalDataProps>({
         data: payload
       })
     },
-    // 获取所有专栏
-    fetchColumns ({ state, commit}) {
-      return asyncAndCommit('/api/column/list', 'fetchColumns', commit, {
-        method: 'post'
-      })
+    // Home获取所有专栏
+    fetchColumns({ state, commit}, params = {}) {
+      const { currentPage = 1, pageSize = 3} = params
+      return asyncAndCommit(`/api/column/page?currentPage=${currentPage}&pageSize=${pageSize}`, 'fetchColumns', commit)
+    },
+    fetchColumn({ state, commit }, cid) {
+      if (!state.columns.data[cid]) {
+        return asyncAndCommit(`/api/column/detail?id=${cid}`, 'fetchColumn', commit)
+      }
+    },
+    fetchPosts({ state, commit }, params = {}) {
+      const {currendId, currentPage = 1, pageSize = 3} = params
+      // console.log('param', params)
+      // console.log('fetchPosts', currendId, currentPage, pageSize)
+      // if (!state.posts.loadedColumns.includes(cid)) {
+        return asyncAndCommit(`api/post/page?cid=${currendId}&currentPage=${currentPage}&pageSize=${pageSize}`, 'fetchPosts', commit)
+      // }
     }
   }
 })
-
+// http://localhost:8081/api/post/page?cid=1&currentPage=1&pageSize=2
 export default store

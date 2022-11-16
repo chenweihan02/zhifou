@@ -78,7 +78,7 @@
             useCreateMessage('登录成功, 2s后跳转', 'success')
             console.log(store.state.user.nickname)
             setTimeout(() => {
-              router.push({ name: 'home' })
+              router.push('/')
             }, 2000);
           } else {
             useCreateMessage('登录失败', 'error')
