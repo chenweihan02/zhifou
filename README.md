@@ -93,3 +93,17 @@ http://localhost:8081/api/column/detail?id=1
 
 login.vue 和 signup.vue 按钮位置
 login.vue 和 signup 输入信息之后 清空输入框
+
+---
+edit 暂停
+createPost
+deletePost
+updatePost
+
+测试上传图片。
+
+点击选中图片上传，此时img 是转圈的状态，且不可操作，操作完成之后，显示上传后的图片
+
+修改form 尺寸
+
+图片上传，默认图片

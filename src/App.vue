@@ -1,6 +1,8 @@
 <template>
     <global-header :user="currentUser"/>
     <!-- <modal /> -->
+    <!-- <upload-file /> -->
+
 
     <loader v-show="isLoading" :text="'拼命加载中'"/>
 
@@ -19,6 +21,7 @@
   import GlobalFooter from './components/GlobalFooter.vue'
   import Modal from './components/Modal.vue'
   import Message from './components/Message.vue'
+  import UploadFile from './components/UploadFile.vue'
   
   import { computed } from '@vue/reactivity'
   import store from './store'

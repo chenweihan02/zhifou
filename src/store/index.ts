@@ -49,7 +49,7 @@ const store = createStore<GlobalDataProps>({
     getPostsByCid: (state) => (cid: string) => {
       console.log('getPostsById', cid)
       console.log('post', state.posts.data)
-      return objToArr(state.posts.data).filter(post => post.column_id == cid)
+      return objToArr(state.posts.data).filter(post => post.column_id === cid)
     },
     getCurrentPost: (state) => (id: string) => {
       return state.posts.data[id]
@@ -83,6 +83,9 @@ const store = createStore<GlobalDataProps>({
       state.user = { isLogin: false }
       localStorage.removeItem('token')
       delete http.defaults.headers.common.Authorization
+    },
+    register(state, rawData) {
+      
     },
     //Home
     fetchColumns(state, rawData) {
@@ -139,6 +142,12 @@ const store = createStore<GlobalDataProps>({
         data: payload
       })
     },
+    register({ commit }, payload) {
+      return asyncAndCommit('api/user/register', 'register', commit, {
+        method: 'post',
+        data: payload
+      })
+    },
     // Home获取所有专栏
     fetchColumns({ state, commit}, params = {}) {
       const { currentPage = 1, pageSize = 3} = params
@@ -149,6 +158,7 @@ const store = createStore<GlobalDataProps>({
         return asyncAndCommit(`/api/column/detail?id=${cid}`, 'fetchColumn', commit)
       }
     },
+    // 通过cloumdid 获取文章 进行分页
     fetchPosts({ state, commit }, params = {}) {
       const {currentId, currentPage = 1, pageSize = 3} = params
       console.log('param', params, currentId)
@@ -156,6 +166,9 @@ const store = createStore<GlobalDataProps>({
       // if (!state.posts.loadedColumns.includes(cid)) {
         return asyncAndCommit(`api/post/page?cid=${currentId}&currentPage=${currentPage}&pageSize=${pageSize}`, 'fetchPosts', commit)
       // }
+    },
+    fetchUploadFile({ state, commit}, param = {}) {
+      
     }
   }
 })

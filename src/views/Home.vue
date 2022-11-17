@@ -40,6 +40,6 @@
   const total = computed(() => store.state.columns.total)
   const { loadMorePage, isLastPage } = useLoadMore('fetchColumns', total, { currentId: '' , currentPage: 2, pageSize: 3})
 
-  console.log('Home-list', list)
+  // console.log('Home-list', list)
 
 </script>

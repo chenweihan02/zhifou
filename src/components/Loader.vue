@@ -16,39 +16,39 @@
 
 <style lang="less">
   .load {
-  width: 50px;
-  height: 50px;
-  margin: 0 auto;
-  position: relative;
-  border-radius: 50%;
-  overflow: hidden;
-  background-color: rgba(5, 236, 249, .8);;
-    &::before {
-      content: "";
-      width: 70px; // 50 * √2
-      height: 70px; // 50 * √2
-      background-color: hwb(233 5% 22%);
-      position: absolute;
-      left: 50%;
-      bottom: 50%;
-      z-index: 1;
-      transform-origin: left bottom;
-      animation: rotate 1.5s infinite linear;
-    }
-    &::after {
-      content: "";
-      width: 40px;
-      height: 40px;
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      margin: auto;
-      background-color: #fff;
-      z-index: 2;
-      border-radius: 50%;
-    }
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: rgba(5, 236, 249, 0.8);
+  }
+  .load::before {
+    content: "";
+    width: 70px;
+    height: 70px;
+    background-color: hwb(233 5% 22%);
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+    z-index: 1;
+    transform-origin: left bottom;
+    animation: rotate 1.5s infinite linear;
+  }
+  .load::after {
+    content: "";
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: #fff;
+    z-index: 2;
+    border-radius: 50%;
   }
   @keyframes rotate {
     0% {
@@ -61,4 +61,5 @@
       transform: rotate(360deg);
     }
   }
+
 </style>

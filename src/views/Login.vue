@@ -7,7 +7,6 @@
         <validate-input 
           :rules="emailRules" v-model="emailVal" 
           placeholder="请输入邮箱地址" 
-          type="text"
         />
       </div>
 
@@ -16,7 +15,6 @@
         <validate-input 
           :rules="passwordRules" v-model="passwordVal" 
           placeholder="请输入密码" 
-          type="text" 
         />
       </div>
 
@@ -32,8 +30,6 @@
     </validate-form>
   </div>
 </template>
-
-
 
 <script lang="ts" setup>
   import ValidateForm from '@/components/ValidateForm.vue'

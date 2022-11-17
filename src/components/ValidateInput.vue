@@ -6,6 +6,7 @@
       @blur="validateInput"
       v-model="inputRef.val"
       v-bind="$attrs"
+      type="text"
     />
 
     <textarea

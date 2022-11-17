@@ -98,35 +98,42 @@ import ValidateForm from '@/components/ValidateForm.vue'
 
   const store = useStore<GlobalDataProps>()
 
+  // 重置输入框
+  const reset = () => {
+    emailVal.value = ''
+    nicknameVal.value = ''
+    passwordVal.value = ''
+    repeatPasswordVal.value = ''
+  }
+
+
   const onFormSubmit = (result: boolean) => {
     if (result) {
       // 验证password  repeatpassword
       // if (passwordVal.value !== repeatPasswordVal.value) return 
-
-
-
-
-
+      
       const payload = {
         email: emailVal.value,
         nickname: nicknameVal.value,
         password: passwordVal.value
       }
 
+      reset()
+
       store
-        .dispatch('loginAndFetch', payload)
+        .dispatch('register', payload)
         .then((res) => {
           console.log('signup.vue res', res)
           
           if (res.code) {
-            useCreateMessage('登录成功, 2s后跳转', 'success')
-            console.log(store.state.user.nickname)
-            setTimeout(() => {
-              router.push('/')
-            }, 2000);
+            useCreateMessage('注册成功', 'success')
+            // console.log(store.state.user.nickname)
+            // setTimeout(() => {
+            //   router.push('/')
+            // }, 2000);
           } else {
-            useCreateMessage('登录失败', 'error')
-            console.log('登录失败', res)
+            useCreateMessage('注册失败', 'error')
+            console.log('注册失败', res)
           }
         })
 

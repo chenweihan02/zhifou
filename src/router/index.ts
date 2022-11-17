@@ -41,13 +41,13 @@ const router = createRouter({
       path: '/edit',
       name: 'edit',
       component: () => import("@/views/UserDetail.vue"),
-      meta: { requiredLogin: true }
+      // meta: { requiredLogin: true }
     },
     {
       path: '/create',
       name: 'create',
       component: () => import("@/views/CreatePost.vue"),
-      meta: { requiredLogin: true }
+      // meta: { requiredLogin: true }
     }
   ]
 })

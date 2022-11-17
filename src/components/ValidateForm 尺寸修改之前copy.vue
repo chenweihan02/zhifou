@@ -1,11 +1,13 @@
 <template>
-  <form class="mx-auto mt-5">
-    <slot name="default"></slot>
-    <slot name="guide"></slot>
-    <div class="submit-area mt-5 inline-block" @click.prevent="submitForm">
-      <slot name="submit"></slot>
-    </div>
-  </form>
+  <div class="border border-black max-w-screen-xl mx-auto">
+    <form class="mx-auto w-72 border mt-5">
+      <slot name="default"></slot>
+      <slot name="guide"></slot>
+      <div class="submit-area mt-5 inline-block" @click.prevent="submitForm">
+        <slot name="submit"></slot>
+      </div>
+    </form>
+  </div>
 </template>
 
 

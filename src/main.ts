@@ -8,6 +8,7 @@ import useDriectives from '@/directives'
 
 // 异步组件
 // import Home from './views/Home.vue'
+// import '@/assets/css/index.css'
 
 
 const app = createApp(App)
