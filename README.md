@@ -7,7 +7,7 @@
 
 ---
 专栏信息
-![column](https://img.lkxin.cn/tu/2022/11/18/637765550c9f4.png)
+![column](./README_ASSETS/column.png)
 ---
 登录界面
 ![login](https://img.lkxin.cn/tu/2022/11/18/6377655480434.png)
