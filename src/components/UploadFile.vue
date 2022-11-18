@@ -1,24 +1,27 @@
 <template>
   <div>
-      <div class="mt-1 flex justify-center rounded-full border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
-        <div class="space-y-1 text-center border">
-          <div class="flex text-sm text-gray-600 relative">
-            <div v-if="loading" class="opacity-60 bg-black absolute w-full h-full flex justify-center items-center">
-              <div class="load"></div>
-            </div>
-            <label for="file-upload"
-              class="cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
-              
-              <img v-if="callbackUrl.length" :src="callbackUrl" width="100" height="100" />
-              <img v-else src="@/assets/avatar.png" width="100" height="100" />
+      <div class="mt-1 h-56 flex justify-center border-2 border-dashed bg-gray-100 border-gray-300">
+        <div class="border  w-80 overflow-hidden">
+          <div class="relative" style="padding-bottom: 80%">
+            <div class="absolute top-0 left-0 w-full h-full">
+              <div v-if="loading" class="opacity-60 bg-black absolute w-full h-full flex justify-center items-center">
+                <div class="load"></div>
+              </div>
 
-              <input 
-                @change="changeHandler"
-                id="file-upload" 
-                name="file-upload" 
-                type="file" 
-                class="sr-only" />
-            </label>
+              <label for="file-upload"
+                class="cursor-pointer rounded-md bg-white font-medium text-indigo-600 block w-full h-56">
+                <img v-if="callbackUrl.length" :src="callbackUrl"  />
+                <img v-else src="@/assets/avatar.png" />
+
+                <input 
+                  @change="changeHandler"
+                  id="file-upload" 
+                  name="file-upload" 
+                  type="file" 
+                  class="sr-only" />
+                </label>
+
+            </div>
           </div>
         </div>
     </div>

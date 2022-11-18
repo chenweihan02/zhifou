@@ -1,55 +1,57 @@
 <template>
   <div class="login-page">
     <h5 class="text-lg text-center">注册到知否</h5>
-    <validate-form @form-submit="onFormSubmit">
+    <div class="border border-black max-w-screen-xl mx-auto">
+      <validate-form 
+        class="mx-auto w-72 border mt-5"
+        @form-submit="onFormSubmit">
+        <div>
+          <label class="inline-block" for="">邮箱地址</label>
+          <validate-input 
+            :rules="emailRules" v-model="emailVal" 
+            placeholder="请输入邮箱地址" 
+            type="text"
+          />
+        </div>
 
+        <div>
+          <label class="inline-block" for="">昵称</label>
+          <validate-input 
+            :rules="nicknameRules" v-model="nicknameVal" 
+            placeholder="请输入昵称" 
+            type="text"
+          />
+        </div>
 
-      <div>
-        <label class="inline-block" for="">邮箱地址</label>
-        <validate-input 
-          :rules="emailRules" v-model="emailVal" 
-          placeholder="请输入邮箱地址" 
-          type="text"
-        />
-      </div>
+        <div class="mt-4">
+          <label class="inline-block" for="">密码</label>
+          <validate-input 
+            :rules="passwordRules" v-model="passwordVal" 
+            placeholder="请输入密码" 
+            type="text" 
+          />
+        </div>
 
-      <div>
-        <label class="inline-block" for="">昵称</label>
-        <validate-input 
-          :rules="nicknameRules" v-model="nicknameVal" 
-          placeholder="请输入昵称" 
-          type="text"
-        />
-      </div>
+        <div class="mt-4">
+          <label class="inline-block" for="">重复密码</label>
+          <validate-input 
+            :rules="repeatPasswordRules" v-model="repeatPasswordVal" 
+            placeholder="请再次输入密码" 
+            type="text" 
+          />
+        </div>
 
-      <div class="mt-4">
-        <label class="inline-block" for="">密码</label>
-        <validate-input 
-          :rules="passwordRules" v-model="passwordVal" 
-          placeholder="请输入密码" 
-          type="text" 
-        />
-      </div>
+        <template #guide>
+          <a href="/login" class="inline-block mt-5 text-blue-500 underline">已经有账户？去登录吧！！！！！</a>
+        </template>
 
-      <div class="mt-4">
-        <label class="inline-block" for="">重复密码</label>
-        <validate-input 
-          :rules="repeatPasswordRules" v-model="repeatPasswordVal" 
-          placeholder="请再次输入密码" 
-          type="text" 
-        />
-      </div>
-
-      <template #guide>
-        <a href="/login" class="inline-block mt-5 text-blue-500 underline">已经有账户？去登录吧！！！！！</a>
-      </template>
-
-      <template #submit>
-        <button class="rounded text-white pl-3.5 pr-3.5 pt-1.5 pb-1.5 bg-blue-600 hover:bg-blue-700">
-          注册
-        </button>
-      </template>
-    </validate-form>
+        <template #submit>
+          <button class="rounded text-white pl-3.5 pr-3.5 pt-1.5 pb-1.5 bg-blue-600 hover:bg-blue-700">
+            注册
+          </button>
+        </template>
+      </validate-form>
+    </div>
   </div>
 </template>
 

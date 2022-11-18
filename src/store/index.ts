@@ -49,7 +49,7 @@ const store = createStore<GlobalDataProps>({
     getPostsByCid: (state) => (cid: string) => {
       console.log('getPostsById', cid)
       console.log('post', state.posts.data)
-      return objToArr(state.posts.data).filter(post => post.column_id === cid)
+      return objToArr(state.posts.data).filter(post => post.column_id == cid)
     },
     getCurrentPost: (state) => (id: string) => {
       return state.posts.data[id]

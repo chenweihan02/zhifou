@@ -110,3 +110,12 @@ updatePost
 
 
 md编辑器
+
+---
+
+TODO:
+0. store getPostsByCid == 和 ===的问题
+1. CreatePost 的图片样式，和 ColumnDetail post的图片样式一样。 和 post
+2. 提交普通表单，textarea，后期再改用markdown
+3. uploader 上传组件修改。
+4. createPost 和 editPost 合在一块。

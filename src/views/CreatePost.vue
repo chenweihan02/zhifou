@@ -2,8 +2,6 @@
   
   <div class="max-w-screen-xl mx-auto">
     <div class="mt-8">
-      <MDE></MDE>
-
 
       <h4 class="text-xl">新建文章</h4>
       <upload-file />
@@ -46,7 +44,6 @@
   import UploadFile from '@/components/UploadFile.vue'
   import ValidateForm from '@/components/ValidateForm.vue'
   import ValidateInput, { RulesProps } from '@/components/ValidateInput.vue'
-  import MDE from '@/components/MDE.vue'
 
 
   import { ref } from 'vue'

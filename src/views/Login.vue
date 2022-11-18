@@ -1,33 +1,37 @@
 <template>
   <div class="login-page">
     <h5 class="text-lg text-center">登录到知否</h5>
-    <validate-form @form-submit="onFormSubmit">      
-      <div>
-        <label class="inline-block" for="">邮箱地址</label>
-        <validate-input 
-          :rules="emailRules" v-model="emailVal" 
-          placeholder="请输入邮箱地址" 
-        />
-      </div>
+    <div class="border border-black max-w-screen-xl mx-auto">
+      <validate-form 
+        class="mx-auto w-72 border mt-5"
+        @form-submit="onFormSubmit">      
+        <div>
+          <label class="inline-block" for="">邮箱地址</label>
+          <validate-input 
+            :rules="emailRules" v-model="emailVal" 
+            placeholder="请输入邮箱地址" 
+          />
+        </div>
 
-      <div class="mt-4">
-        <label class="inline-block" for="">密码</label>
-        <validate-input 
-          :rules="passwordRules" v-model="passwordVal" 
-          placeholder="请输入密码" 
-        />
-      </div>
+        <div class="mt-4">
+          <label class="inline-block" for="">密码</label>
+          <validate-input 
+            :rules="passwordRules" v-model="passwordVal" 
+            placeholder="请输入密码" 
+          />
+        </div>
 
-      <template #guide>
-        <a href="/signup" class="inline-block mt-5 text-blue-500 underline">还没有账户？去注册一个新的吧！</a>
-      </template>
+        <template #guide>
+          <a href="/signup" class="inline-block mt-5 text-blue-500 underline">还没有账户？去注册一个新的吧！</a>
+        </template>
 
-      <template #submit>
-        <button class="rounded text-white pl-3.5 pr-3.5 pt-1.5 pb-1.5 bg-blue-600 hover:bg-blue-700">
-          登录
-        </button>
-      </template>
-    </validate-form>
+        <template #submit>
+          <button class="rounded text-white pl-3.5 pr-3.5 pt-1.5 pb-1.5 bg-blue-600 hover:bg-blue-700">
+            登录
+          </button>
+        </template>
+      </validate-form>
+    </div>
   </div>
 </template>
 
