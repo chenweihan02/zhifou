@@ -1,8 +1,9 @@
 
 ## 知否知否
 
+---
 主页
-![home.png](https://img.lkxin.cn/tu/2022/11/18/637765549b356.png)
+![https://img.lkxin.cn/tu/2022/11/18/637765549b356.png](https://img.lkxin.cn/tu/2022/11/18/637765549b356.png)
 
 ---
 专栏信息
