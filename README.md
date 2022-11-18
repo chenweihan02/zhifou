@@ -3,7 +3,7 @@
 
 ---
 主页
-![home](https://img.lkxin.cn/tu/2022/11/18/637765549b356.png)
+![home](./README_ASSETS/home.png)
 
 ---
 专栏信息
@@ -12,12 +12,12 @@
 
 ---
 登录界面
-![login](https://img.lkxin.cn/tu/2022/11/18/6377655480434.png)
+![login](./README_ASSETS/login.png)
 
 
 ---
 编辑资料
-![edit](https://img.lkxin.cn/tu/2022/11/18/63776554a0ebc.png)
+![edit](./README_ASSETS/edit.png)
 
 
 
