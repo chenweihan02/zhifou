@@ -1,6 +1,24 @@
 
 ## 知否知否
 
+主页
+![home.png](https://img.lkxin.cn/tu/2022/11/18/637765549b356.png)
+
+---
+专栏信息
+![column.png](https://img.lkxin.cn/tu/2022/11/18/637765550c9f4.png)
+---
+登录界面
+![login.png](https://img.lkxin.cn/tu/2022/11/18/6377655480434.png)
+---
+编辑资料
+![edit.png](https://img.lkxin.cn/tu/2022/11/18/63776554a0ebc.png)
+
+
+
+
+
+
 
 ## Vue 3 + TypeScript + Vite
 
