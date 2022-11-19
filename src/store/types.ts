@@ -1,9 +1,4 @@
 
-// export interface ImageProps {
-//   _id?: string
-//   url?: string
-// }
-
 export interface ResponseType< P = Record<string, unknown>> {
   code: number
   msg: string

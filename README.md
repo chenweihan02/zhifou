@@ -1,6 +1,29 @@
 
 ## 知否知否
 
+---
+主页
+![home](./README_ASSETS/home.png)
+
+---
+专栏信息
+![column](./README_ASSETS/column.png)
+
+
+---
+登录界面
+![login](./README_ASSETS/login.png)
+
+
+---
+编辑资料
+![edit](./README_ASSETS/edit.png)
+
+
+
+---
+
+
 
 ## Vue 3 + TypeScript + Vite
 
@@ -20,7 +43,7 @@ Since TypeScript cannot handle type information for `.vue` imports, they are shi
 You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
 
 
-====
+---
 
 1. mitt, 在validateForm中使用报错， emitter.emit not a function, 将emitter定义在mittBus中然后导出。
 2. API: http://duanhf.cn:8099/public/swagger/index.html#/user/post_api_user_login
@@ -119,3 +142,6 @@ TODO:
 2. 提交普通表单，textarea，后期再改用markdown
 3. uploader 上传组件修改。
 4. createPost 和 editPost 合在一块。
+
+---
+创建文章，查看文章内容。

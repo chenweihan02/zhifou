@@ -52,6 +52,7 @@ const store = createStore<GlobalDataProps>({
       return objToArr(state.posts.data).filter(post => post.column_id == cid)
     },
     getCurrentPost: (state) => (id: string) => {
+      console.log('getCurrentPost', state.posts.data[id])
       return state.posts.data[id]
     }
   },
@@ -122,6 +123,16 @@ const store = createStore<GlobalDataProps>({
     //   // }
     //   // state.posts.loadedColumns.push(column_id)
     // }
+    ,
+    createPost(state, newPost) {
+      //TODO 发表成功后的文章内容，直接存入state.post
+      // console.log('mutation newPost', newPost)
+      // state.posts.data[newPost._id] = newPost
+    },
+    fetchPost(state, rawData) {
+      state.posts.data[rawData.data._id] = rawData.data
+      console.log('mutation', state.posts.data[rawData.data._id])
+    }
   },
   actions: {
     // 登录并获取用户信息
@@ -169,6 +180,19 @@ const store = createStore<GlobalDataProps>({
     },
     fetchUploadFile({ state, commit}, param = {}) {
       
+    },
+    //=====create post ========================
+    createPost({ commit }, payload) {
+      return asyncAndCommit('/api/post/create', 'createPost', commit, {
+        method: 'post',
+        data: payload
+      })
+    },
+    fetchPost({ state, commit }, id) {
+      const currentPost = state.posts.data[id]
+      // if (!currentPost || !currentPost.content) {
+        return asyncAndCommit(`api/post/detail?id=${id}`, 'fetchPost', commit)
+      // }
     }
   }
 })

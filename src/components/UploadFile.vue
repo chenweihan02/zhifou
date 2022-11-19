@@ -42,6 +42,9 @@
   // 默认图片
   const callbackUrl = ref('')
 
+
+  const emit = defineEmits(['callbackImgUrl'])
+
   const changeHandler = (e:Event) => {
     const currentTarget = e.target as HTMLInputElement
     // 获取第一个文件
@@ -66,6 +69,9 @@
           createMessage('上传成功', 'success')
           const pathname = res.data.newName
           callbackUrl.value = 'http://localhost:8081/img/' + pathname
+          
+          emit('callbackImgUrl', callbackUrl.value)
+
           // console.log('get img pathname', pathname)
           // // 上传成功回显服务器的图片
           // axios.get('http://localhost:8081/img/' + pathname).then((res)=>{

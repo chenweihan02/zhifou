@@ -4,7 +4,9 @@
     <div class="mt-8">
 
       <h4 class="text-xl">新建文章</h4>
-      <upload-file />
+      <upload-file 
+        @callback-img-url="onCallbackImgUrl"
+        />
 
       <validate-form 
         class="w-full"
@@ -65,34 +67,41 @@
 
   const titleVal = ref('')
   const contentVal = ref('')
+  const imgUrlVal = ref('')
 
   const store = useStore<GlobalDataProps>()
+  // store.state.user.column_id
+
+  const onCallbackImgUrl = (res: string) => {
+    imgUrlVal.value = res
+    console.log('createPost', res)
+  }
+
 
   const onFormSubmit = (result: boolean) => {
     if (result) {
       console.log('Create Post 校验成功')
       const payload = {
         title: titleVal.value,
-        content: contentVal.value
-        //column_id, author_id
+        excerpt: contentVal.value,
+        content: contentVal.value,
+        column_id: store.state.user.column_id,
+        author_id: store.state.user._id,
+        img_url: imgUrlVal.value
       }
 
-      // store
-      //   .dispatch('loginAndFetch', payload)
-      //   .then((res) => {
-      //     console.log('login.vue res', res)
-          
-      //     if (res.code) {
-      //       useCreateMessage('登录成功, 2s后跳转', 'success')
-      //       console.log(store.state.user.nickname)
-      //       setTimeout(() => {
-      //         router.push('/')
-      //       }, 2000);
-      //     } else {
-      //       useCreateMessage('登录失败', 'error')
-      //       console.log('登录失败', res)
-      //     }
-      //   })
+      store
+        .dispatch('createPost', payload)
+        .then((res) => {
+          console.log('createPost', res)
+
+          if (res.code) {
+            useCreateMessage('发表成功', 'success')
+          } else {
+            useCreateMessage('发表失败', 'error')
+          }
+        })
+
     } else {
       console.log('Create Post 校验失败')
     }

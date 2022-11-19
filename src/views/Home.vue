@@ -3,7 +3,7 @@
   <div class="max-w-screen-xl mt-12 mx-auto border flex justify-center  flex-col items-center">
     <img src="@/assets/callout.svg" width="300" alt="">
     <button class="mt-6 rounded text-white pl-3.5 pr-3.5 pt-2 pb-2 bg-blue-600 hover:bg-blue-700">
-      开始写文章
+      <router-link to="/create" >开始写文章</router-link>
     </button>
   </div>
 
