@@ -142,6 +142,9 @@ TODO:
 2. 提交普通表单，textarea，后期再改用markdown
 3. uploader 上传组件修改。
 4. createPost 和 editPost 合在一块。
+<<<<<<< HEAD
 
 ---
 创建文章，查看文章内容。
+=======
+>>>>>>> 8f5a087c303609fb944ac6bab887ec32d3f6a604
