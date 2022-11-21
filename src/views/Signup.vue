@@ -42,7 +42,7 @@
         </div>
 
         <template #guide>
-          <a href="/login" class="inline-block mt-5 text-blue-500 underline">已经有账户？去登录吧！！！！！</a>
+          <a href="/login" class="block mt-5 text-blue-500 underline">已经有账户？去登录吧！</a>
         </template>
 
         <template #submit>

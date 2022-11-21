@@ -11,7 +11,7 @@
               <label for="file-upload"
                 class="cursor-pointer rounded-md bg-white font-medium text-indigo-600 block w-full h-56">
                 <img v-if="callbackUrl.length" :src="callbackUrl"  />
-                <img v-else src="@/assets/avatar.png" />
+                <img v-else src="@/assets/column.png" />
 
                 <input 
                   @change="changeHandler"
