@@ -29,8 +29,18 @@
         </div>
       </div>
 
+      <div>
+        内容内容
+      </div>
 
-      
+      <div class="text-gray-500 text-sm">
+        编辑于<span class="pl-2">2022-11-11 11:11</span>
+      </div>
+
+      <div class="tag space-x-2">
+        <span class="con">深度学习（Deep Learning）</span>
+        <span class="con">工作站（Workstation）</span>
+      </div>
     </div>
   </div>
 
@@ -39,6 +49,14 @@
   <post-comment></post-comment>
   <pre>{{route}}</pre>
 </template>
+
+
+<style scoped>
+  .con {
+    @apply inline-block px-2 py-1.5 bg-blue-100 text-blue-600 text-sm rounded-2xl
+  }
+</style>
+
 
 <script lang="ts" setup>
   import { onMounted, computed } from 'vue';
