@@ -55,6 +55,7 @@
   import router from '@/router';
 
   import useCreateMessage from '@/hooks/useCreateMessage'
+import { resetGuessing } from 'tern';
 
 
   const titleRules: RulesProps = [
@@ -77,6 +78,11 @@
     console.log('createPost', res)
   }
 
+  const reset = () => {
+    titleVal.value = '';
+    contentVal.value = '';
+  }
+
 
   const onFormSubmit = (result: boolean) => {
     if (result) {
@@ -90,11 +96,12 @@
         img_url: imgUrlVal.value
       }
 
+      reset();
+
       store
         .dispatch('createPost', payload)
         .then((res) => {
           console.log('createPost', res)
-
           if (res.code) {
             useCreateMessage('发表成功', 'success')
           } else {

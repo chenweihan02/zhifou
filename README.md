@@ -65,24 +65,10 @@ You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/
 2. 将login currentUser的JSON 放在json server中
 
 
-```ts
-  <message>
-    <message-item />
-    <message-item />
-    <message-item />
-    <message-item />
-  </message>
-```
 
 ---
 已完成：
 1. login.vue ok
-
-
-
-----
-
-npm i less
 
 
 ---
@@ -99,7 +85,7 @@ return 回去的数据格式
 --
 
 column 专栏没有默认图片，在columnlist中新加一个 computed属性，对props传过来的图片进行验证
-如果没有图片，则添加默认图片 ||      使用自定义指令
+如果没有图片，则添加默认图片 ||  使用自定义指令
 
 
 获取指定id的专栏
@@ -137,14 +123,15 @@ md编辑器
 ---
 
 TODO:
-0. store getPostsByCid == 和 ===的问题
-1. CreatePost 的图片样式，和 ColumnDetail post的图片样式一样。 和 post
-2. 提交普通表单，textarea，后期再改用markdown
-3. uploader 上传组件修改。
-4. createPost 和 editPost 合在一块。
-<<<<<<< HEAD
+1. store getPostsByCid == 和 ===的问题
+2. CreatePost 的图片样式，和 ColumnDetail post的图片样式一样。 和 post
+3. 提交普通表单，textarea，后期再改用markdown
+4. uploader 上传组件修改。
+5. createPost 和 editPost 合在一块。
 
 ---
 创建文章，查看文章内容。
 
-TODO: jwt token
+
+---
+TODO: 编辑资料
